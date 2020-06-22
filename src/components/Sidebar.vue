@@ -70,7 +70,6 @@ export default {
 <style lang="scss">
 #sidebar {
     width: 11em;
-    height: calc(100% - 50px);
     padding-top: 1.5em;
     display: flex;
     flex-direction: column;
@@ -118,7 +117,7 @@ export default {
 
 .link {
     display: flex;
-    width: 8.3em;
+    width: 8.6em;
     padding-left: 1em;
     border-radius: 31px;
     height: 2em;
