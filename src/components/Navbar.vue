@@ -21,18 +21,18 @@ export default {
 #navbar {
     display: flex;
     width: 100%;
-    height: 56px;
+    height: 1.75em;
     justify-content: space-between;
 }
 
 .logo {
-    font-size: 48px;
+    font-size: 1.5em;
     margin: 0;
     font-weight: bold;
 
     sup {
         color: #045E07;
-        font-size: 28px;
+        font-size: 0.7em;
     }
 }
 
@@ -40,6 +40,7 @@ export default {
     width: 220px;
     flex: unset !important;
     margin-right: 10px;
+    padding-top: 0 !important;
 }
 
 .right {
@@ -64,6 +65,6 @@ export default {
     justify-content: center;
     align-items: center;
     left: -12px;
-    top: 15px;
+    top: 8px;
 }
 </style>

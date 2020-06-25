@@ -27,22 +27,27 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #dashboard {
   display: flex;
   flex: 1 0 auto;
+  padding-top: 0.5em;
 }
 
 .column {
   display: flex;
   flex-direction: column;
   width: 50%;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 0 2em;
 
   &:first-child {
     border-right: 1px solid gray;
+  }
+
+  & > div {
+    flex: 1 0 auto;
   }
 }
 </style>

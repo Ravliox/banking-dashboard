@@ -3,14 +3,19 @@
         <div class="header">
             <h1> Your debit card </h1>
             <div class="options">
-                <v-icon color="#045E07" size="32">mdi-eye</v-icon>
-                <v-icon color="#045E07" size="32">mdi-plus</v-icon>
+                <v-btn v-if="!backView" icon @click="switchCardView()"><v-icon color="#045E07" size="32">mdi-eye</v-icon></v-btn>
+                <v-btn v-if="backView" icon @click="switchCardView()"><v-icon color="#045E07" size="32">mdi-eye-off</v-icon></v-btn>
+                <v-btn icon><v-icon color="#045E07" size="32">mdi-plus</v-icon></v-btn>
             </div>
         </div>
         <div class="card-display">
-            <img :src="cardFront">
-            <img :src="cardBack">
+            <img :src="cardFront" :class="{'hidden': backView}">
+            <div class="card-back" :class="{'hidden': !backView}">
+                <img :src="cardBack">
+                <p class="cvv">556</p>
+            </div>
         </div>
+        <h1 class="total"> 21, 020 $ USD </h1>
     </div>    
 </template>
 
@@ -19,7 +24,13 @@ export default {
     data() {
         return {
             cardFront: require("@/assets/dashboard/card-front.png"),
-            cardBack: require("@/assets/dashboard/card-back.svg")
+            cardBack: require("@/assets/dashboard/card-back.png"),
+            backView: false
+        }
+    },
+    methods: {
+        switchCardView() {
+            this.backView = !this.backView;
         }
     }
 }
@@ -28,7 +39,9 @@ export default {
 <style lang="scss" scoped>
 #debit-card {
     width: 100%;
-    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .header {
@@ -42,7 +55,7 @@ export default {
     }
 
     .options {
-        i:first-child {
+        button:first-child {
             margin-right: 0.8em;
         }
     }
@@ -50,8 +63,39 @@ export default {
 
 .card-display {
     width: 100%;
+    display: flex;
+    justify-content: center;
     img {
-        line-height: 100%;
+        height: 8.75em;
+        margin-top: 1em;
     }
+
+    .card-back {
+        position: relative;
+        height: 8.75em;
+        margin-top: 1em;
+
+        img {
+            margin-top: 0;
+        }
+    }
+
+    .cvv {
+        position: absolute;
+        bottom: 0;
+        right: 1em;
+        top: 5em;
+        font-weight: bold;
+    }
+
+    .hidden {
+        display: none;
+    }
+}
+
+.total {
+    font-size: 1em;
+    text-align: right;
+    margin-top: 1em;
 }
 </style>

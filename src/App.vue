@@ -33,20 +33,24 @@ body {
   margin: 0;
 }
 
-#app {
-  height: 100vh;
-  padding: 28px 100px 50px 100px;
-  font-size: 32px;
-  display: flex;
-  flex-direction: column;
+html {
+  font-size: 24px;
 
   @media screen and (max-width: 1919px) and (max-height: 1080px) {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   @media screen and (min-width: 1000px) and (max-height: 700px) {
     font-size: 18px;
   }
+}
+
+#app {
+  height: 100vh;
+  padding: 0.75em 3.12em;
+  padding-bottom: 1.2em;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
