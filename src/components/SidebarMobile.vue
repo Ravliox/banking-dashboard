@@ -1,21 +1,23 @@
 <template>
-  <div id="sidebar" :class="{'retracted': isRetracted, 'mobile-expanded': mobileRetracted}">
-      <div class="links">
-        <button class="menu-trigger" @click="retractSideBar()"><v-icon size="48">mdi-chevron-left</v-icon></button>
-        <button @click="selectNewLink(link)" class="link" :class="{'selected': link.selected}" v-for="(link, index) in links" :key="index">
-            <v-icon size="32" color="#425042">{{link.icon}}</v-icon>
-            <p>{{link.label}}</p>
-        </button>
-      </div>
-      <div class="settings">
-        <button class="setting">
-            <v-icon size="32" color="#7B7B7B">mdi-cog</v-icon>
-            <p>Settings</p>
-        </button>
-        <button class="setting">
-            <v-icon size="32" color="#7B7B7B">mdi-logout</v-icon>
-            <p>Logout</p>
-        </button>
+  <div id="sidebar-mobile" :class="{'retracted': isRetracted, 'mobile-expanded': mobileRetracted}">
+    <div class="overlay" />
+    <div class="side-container">
+        <div class="links">
+            <button @click="selectNewLink(link)" class="link" :class="{'selected': link.selected}" v-for="(link, index) in links" :key="index">
+                <v-icon size="32" color="#425042">{{link.icon}}</v-icon>
+                <p>{{link.label}}</p>
+            </button>
+        </div>
+        <div class="settings">
+            <button class="setting">
+                <v-icon size="32" color="#7B7B7B">mdi-cog</v-icon>
+                <p>Settings</p>
+            </button>
+            <button class="setting">
+                <v-icon size="32" color="#7B7B7B">mdi-logout</v-icon>
+                <p>Logout</p>
+            </button>
+        </div>
     </div>
   </div>
 </template>
@@ -71,50 +73,43 @@ export default {
 </script>
 
 <style lang="scss">
-#sidebar {
-    width: 11em;
-    padding-top: 1.5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-right: 1px solid gray;
-    position: relative;
-    transition: 0.3s width;
+#sidebar-mobile {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: none;
+    background-color: transparent;
+    z-index: 99;
+    overflow: hidden;
+    border-right: none;
 
-    &.retracted {
-        width: calc(2em + 37px); 
-        overflow: hidden;
-
-        .menu-trigger {
-            transform: rotate(180deg);
-        }
-
-        .link {
-            width: calc(2em + 32px);
-
-            p {
-                display: none;
-            }
-        }
-
-        .setting {
-            p {
-                display: none;
-            }
-        }
+    .side-container {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        display: flex;
+        width: 275px;
+        padding-top: 1.5em;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid gray;
+        transition: 0.3s width;
+        z-index: 95;
+        background-color: #fff;
     }
 
-    .menu-trigger {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        &:focus, &:hover {
-            outline: 0;
-            i {
-                color: #000 !important;
-            }
-        }
+    .overlay {
+        background-color: rgb(33, 33, 33);
+        border-color: rgb(33, 33, 33);
+        opacity: 0.5;
+        width: 110vw;
+        height: 110vh;
+        position: fixed;
+        left: -10px;
+        top: -50px;
+        z-index: 90;
     }
 
     .link {
@@ -186,9 +181,13 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
-    #sidebar {
-        display: none;
-    }
+    #sidebar-mobile {
+        display: flex;
 
+        &.mobile-expanded {
+            width: 200px;
+            padding-right: 8px;
+        }
+    }
 }
 </style>

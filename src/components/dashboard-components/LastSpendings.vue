@@ -126,4 +126,14 @@ export default {
       color: #fff;
   }
 }
+
+@media screen and (max-width: 800px) {
+    #last-spendings {
+        .spending-cards {
+            .spending-card {
+                width: 30%;
+            }
+        }
+    }
+}
 </style>

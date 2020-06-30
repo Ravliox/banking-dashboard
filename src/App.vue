@@ -3,7 +3,11 @@
     <Navbar />
     <div class="content">
       <Sidebar />
+      <SidebarMobile />
       <Dashboard />
+      <div class="mobile-nav-menu">
+        <v-btn icon @click="mobileMenuRetracted = true"><v-icon>mdi-menu</v-icon></v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -11,6 +15,7 @@
 <script>
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import SidebarMobile from './components/SidebarMobile';
 import Dashboard from './pages/Dashboard';
 
 export default {
@@ -19,11 +24,12 @@ export default {
   components: {
     Navbar,
     Sidebar,
+    SidebarMobile,
     Dashboard
   },
 
   data: () => ({
-    //
+    mobileMenuRetracted: false
   }),
 };
 </script>
@@ -51,6 +57,7 @@ html {
   padding-bottom: 1.2em;
   display: flex;
   flex-direction: column;
+  width: 100vw;
 }
 
 .content {
@@ -61,5 +68,36 @@ html {
 
 p, h1, h2, h3, div, span, label {
   font-family: Calibri;
+}
+
+.mobile-nav-menu {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  #app {
+    padding: 5px 8px;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  html {
+    font-size: 18px;
+  }
+
+  .content {
+    overflow: hidden;
+    flex: unset;
+    padding-bottom: 100px;
+  }
+
+  .mobile-nav-menu {
+    display: flex;
+    position: fixed;
+    height: 100px;
+    width: 100vw;
+    background-color: #fff;
+    bottom: 0;
+  }
 }
 </style>

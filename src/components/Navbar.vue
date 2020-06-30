@@ -67,4 +67,14 @@ export default {
     left: -12px;
     top: 8px;
 }
+
+@media screen and (max-width: 800px) {
+    .search {
+        width: 150px;
+    }
+
+    #navbar {
+        height: 42px;
+    }
+}
 </style>

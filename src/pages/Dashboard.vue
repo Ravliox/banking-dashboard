@@ -50,4 +50,28 @@ export default {
     flex: 1 0 auto;
   }
 }
+
+
+@media screen and (max-width: 800px) {
+  #dashboard {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex: 1 1 auto;
+    padding-left: 8px;
+  }
+
+  .column {
+    width: 100%;
+    padding: 0;
+
+    &:first-child {
+      border-right: unset;
+    }
+
+    & > div {
+      flex: unset;
+    }
+  }
+}
 </style>

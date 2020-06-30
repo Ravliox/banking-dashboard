@@ -182,4 +182,10 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  #last-transactions {
+    margin-top: 15px;
+  }
+}
 </style>

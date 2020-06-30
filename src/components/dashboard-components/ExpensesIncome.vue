@@ -141,4 +141,31 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  #expenses-income {
+    margin-top: 15px;
+
+    .header {
+      flex-direction: column;
+    }
+
+    .chart-row {
+      flex-direction: column-reverse;
+      .button-collumn {
+        flex-direction: row;
+        justify-content: center;
+
+        button:first-child {
+          margin-right: 5px;
+        }
+
+        button:last-child {
+          margin-left: 5px;
+        }
+      }
+    }
+
+  }
+}
 </style>
