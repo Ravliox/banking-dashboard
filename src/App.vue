@@ -3,10 +3,24 @@
     <Navbar />
     <div class="content">
       <Sidebar />
-      <SidebarMobile />
+      <SidebarMobile :sidebar="mobileSidebar" @retractSidebar="retract()"/>
       <Dashboard />
       <div class="mobile-nav-menu">
-        <v-btn icon @click="mobileMenuRetracted = true"><v-icon>mdi-menu</v-icon></v-btn>
+        <div>
+          <v-btn icon>
+            <v-icon>mdi-bell</v-icon>
+            <div class="notification-number">3</div>
+          </v-btn>
+          <p> Notifications </p>
+        </div>
+        <div>
+          <v-btn icon><v-icon>mdi-home-outline</v-icon></v-btn>
+          <p> Home </p>
+        </div>
+        <div>
+          <v-btn icon @click="expandSidebar()"><v-icon>mdi-menu</v-icon></v-btn>
+          <p> Menu </p>
+        </div>
       </div>
     </div>
   </div>
@@ -29,8 +43,22 @@ export default {
   },
 
   data: () => ({
-    mobileMenuRetracted: false
+    mobileSidebar:  {
+      hidden: true,
+      rendered: false
+    }
   }),
+  methods: {
+    retract() {      
+      this.mobileSidebar.hidden = true;
+      setTimeout(() => { 
+        this.mobileSidebar.rendered = false 
+      }, 200)
+    },
+    expandSidebar() {
+      this.mobileSidebar = new Object({hidden: false, rendered: true})
+    }
+  }
 };
 </script>
 
@@ -94,10 +122,36 @@ p, h1, h2, h3, div, span, label {
   .mobile-nav-menu {
     display: flex;
     position: fixed;
-    height: 100px;
+    justify-content: space-between;
+    height: 55px;
     width: 100vw;
+    padding: 0 10px;
     background-color: #fff;
     bottom: 0;
+    left: 0;
+    box-shadow: 0px -7px 9px 0px rgba(0,0,0, 0.2);
+
+    & > div {
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      button {
+        position: relative;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+
+    .notification-number {
+      position: absolute;
+      left: 20px;
+      top: -3px;
+
+    }
   }
 }
 </style>

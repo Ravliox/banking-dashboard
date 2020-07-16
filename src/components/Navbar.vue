@@ -70,11 +70,21 @@ export default {
 
 @media screen and (max-width: 800px) {
     .search {
-        width: 150px;
+        width: 100%;
+    }
+
+    .right {
+        width: 100%;
     }
 
     #navbar {
         height: 42px;
     }
-}
+
+    #navbar {
+        .logo, .notification-icon, .notification-number {
+                display: none !important;
+            }
+        }
+    }
 </style>

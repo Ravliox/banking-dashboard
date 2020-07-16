@@ -59,6 +59,8 @@ export default {
     overflow-y: scroll;
     flex: 1 1 auto;
     padding-left: 8px;
+    height: 100vh;
+    padding-bottom: 120px;
   }
 
   .column {

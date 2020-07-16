@@ -1,8 +1,9 @@
 <template>
-  <div id="sidebar-mobile" :class="{'retracted': isRetracted, 'mobile-expanded': mobileRetracted}">
-    <div class="overlay" />
+  <div id="sidebar-mobile" :class="{'retracted': sidebar.hidden, 'rendered': sidebar.rendered}">
+    <div class="overlay" @click.stop="retractSideBar()"/>
     <div class="side-container">
         <div class="links">
+            <p class="logo">BFS<sup>4e</sup></p>
             <button @click="selectNewLink(link)" class="link" :class="{'selected': link.selected}" v-for="(link, index) in links" :key="index">
                 <v-icon size="32" color="#425042">{{link.icon}}</v-icon>
                 <p>{{link.label}}</p>
@@ -25,7 +26,7 @@
 <script>
 export default {
     props: [
-      'mobileRetracted'  
+      'sidebar'  
     ],
     data() {
         return {
@@ -66,7 +67,8 @@ export default {
             newLink.selected = true;
         },
         retractSideBar() {
-            this.isRetracted = !this.isRetracted;
+            console.log("click");
+            this.$emit("retractSidebar");
         }
     }
 }
@@ -79,25 +81,46 @@ export default {
     height: 100vh;
     left: 0;
     top: 0;
-    display: none;
     background-color: transparent;
-    z-index: 99;
+    z-index: -1;
     overflow: hidden;
     border-right: none;
+    display: flex;
+
+    &.rendered {
+        z-index: 99;
+    }
+
+    &.retracted {
+        .side-container {
+            transform: translateX(275px);
+        }
+
+        .overlay {
+            opacity: 0;
+        }
+    }
 
     .side-container {
         position: absolute;
         height: 100%;
         right: 0;
+        transform: translateX(0px);
         display: flex;
         width: 275px;
-        padding-top: 1.5em;
+        padding-top: 0.5em;
+        padding-bottom: 2em;
         flex-direction: column;
         justify-content: space-between;
         border-right: 1px solid gray;
-        transition: 0.3s width;
         z-index: 95;
         background-color: #fff;
+        transition: 0.2s transform;
+
+        .logo {
+            text-align: center;
+            font-size: 2.5em;
+        }
     }
 
     .overlay {
@@ -110,18 +133,19 @@ export default {
         left: -10px;
         top: -50px;
         z-index: 90;
+        transition: 0.2s opacity;
     }
 
     .link {
         display: flex;
         width: 8.6em;
+        margin-left: 1em;
         padding-left: 1em;
         border-radius: 31px;
         height: 2em;
         align-items: center;
         box-sizing: border-box;
         cursor: pointer;
-
         transition: 0.2s width;
 
         &:not(:first-child) {
@@ -176,17 +200,6 @@ export default {
             p, i {
                 color: #000 !important;
             }
-        }
-    }
-}
-
-@media screen and (max-width: 800px) {
-    #sidebar-mobile {
-        display: flex;
-
-        &.mobile-expanded {
-            width: 200px;
-            padding-right: 8px;
         }
     }
 }
